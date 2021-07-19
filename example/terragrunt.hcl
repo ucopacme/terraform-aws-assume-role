@@ -1,28 +1,3 @@
-# terraform-aws-assume-role
-Terraform module which creates IAM Role  and IAM Policy resources on AWS
-
-
-
--->
-
-Terraform module to provision AWS [`IAM Assume Role`]
-
-
-
-## Introduction
-
-The module will create:
-
-* IAM assume role 
-
-
-
-## Usage
-1. Create terragrunt.hcl config file and past the following configuration.
-2. Create your policies and save it under the same directory that your HCL file is located.
-
-```hcl
-
 #
 # Include all settings from root terragrunt.hcl file
 include {
@@ -30,7 +5,7 @@ include {
 }
 
 inputs = {
-  enabled               = true # set this to false to destory the resource
+  enabled               = true
   name                  = "kk-test-role"
   assume_role_policy    = local.assume_role_policy
   policy                = local.policy
@@ -53,5 +28,5 @@ locals {
 }
 
 terraform {
-  source = "git::https://git@github.com/ucopacme/terraform-aws-assume-role.git?ref=v0.0.1"
+  source = "git::https://git@github.com/ucopacme/terraform-aws-assume-role.git"
 }
