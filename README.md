@@ -13,45 +13,35 @@ Terraform module to provision AWS [`IAM Assume Role`]
 
 The module will create:
 
-* IAM assume role 
+* IAM assumes role 
 
 
 
 ## Usage
-1. Create terragrunt.hcl config file and past the following configuration.
-2. Create your policies and save it under the same directory that your HCL file is located.
+
 
 ```hcl
 
 #
-# Include all settings from root terragrunt.hcl file
-include {
-  path = find_in_parent_folders()
-}
+# 
 
-inputs = {
-  enabled               = true # set this to false to destory the resource
-  name                  = "kk-test-role"
-  assume_role_policy    = local.assume_role_policy
-  policy                = local.policy
-  description           = "IAM rule for DataDage"
-  max_session_duration  = "3600" # by default it is set to 3600 too
-  force_detach_policies = false  # by default it is set to false too
+module "iam" {
+   source                                    = "git::https://git@github.com/ucopacme/terraform-aws-assume-role.git?ref=v0.0.2"
+  name                                      = "role_name"
+  attach_rds_directoryservice_access_policy = true
+  assume_role_policy                        = data.aws_iam_policy_document.this.json
+  policy_jsons                              = ["${data.aws_iam_policy_document.example.json}"]
+  policy_arns = [
+    "arn:aws:iam::aws:policy/service-role/AmazonRDSDirectoryServiceAccess"
+  ]
   tags = {
-    "ucop:application" = "test"
+    "ucop:application" = "xxx"
     "ucop:createdBy"   = "terraform"
-    "ucop:enviroment"  = "test"
-    "ucop:group"       = "test"
-    "ucop:source"      = local.source
+    "ucop:environment" = "xxx"
+    "ucop:group"       = "xxx"
+    "ucop:source"      = "xxx"
+    "Name"             = "xxx"
+    "ucop:owner"       = "xxx"
   }
 }
 
-locals {
-  policy             = jsondecode(file("./policy.json"))
-  assume_role_policy = jsondecode(file("./assume_policy.json"))
-  source             = join("/", ["https://github.com/ucopacme/ucop-terraform-config/tree/master/terraform/its-chs-dev/us-west-2", path_relative_to_include()])
-}
-
-terraform {
-  source = "git::https://git@github.com/ucopacme/terraform-aws-assume-role.git?ref=v0.0.1"
-}
