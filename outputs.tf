@@ -16,13 +16,13 @@ output "iam_role_name" {
 
 
 output "iam_policy_arn" {
-  value       = aws_iam_policy.role.*.arn
+  value       = aws_iam_policy.user_policies.*.arn
   description = "The ARN assigned by AWS to this policy."
 }
 
 
 
 output "iam_policy_name" {
-  value       = aws_iam_policy.role.*.name
+  value       = aws_iam_policy.user_policies.*.name
   description = "The name of the policy."
 }
