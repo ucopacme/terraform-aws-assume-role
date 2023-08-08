@@ -8,9 +8,15 @@ variable "assume_role_policy" {
   description = "The policy that grants an entity permission to assume the role."
 }
 
-variable "policy" {
-  type        = string
-  description = "The policy document. This is a JSON formatted string."
+variable "policy_jsons" {
+  description = "Valid JSON policies for the role"
+  type        = list
+  default     = []
+}
+variable "policy_arns" {
+  description = "ARNs of IAM policies for the role"
+  type        = list
+  default     = []
 }
 
 variable "path" {
@@ -47,4 +53,10 @@ variable "enabled" {
   default     = true
   description = "Set to `false` to prevent the module from creating any resources"
   type        = bool
+}
+
+variable "attach_rds_directoryservice_access_policy" {
+  description = "Toggles attachment of the attach_rds_directoryservice_access_policy"
+  type        = bool
+  default     = false
 }
