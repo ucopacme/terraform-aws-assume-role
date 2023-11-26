@@ -28,7 +28,6 @@ The module will create:
 module "iam" {
    source                                    = "git::https://git@github.com/ucopacme/terraform-aws-assume-role.git?ref=v0.0.2"
   name                                      = "role_name"
-  attach_rds_directoryservice_access_policy = true
   assume_role_policy                        = data.aws_iam_policy_document.this.json
   policy_jsons                              = ["${data.aws_iam_policy_document.example.json}"]
   policy_arns = [
