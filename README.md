@@ -13,7 +13,7 @@ Terraform module to provision AWS [`IAM Assume Role`]
 
 The module will create:
 
-* IAM assumes role 
+* IAM assumes role
 
 
 
@@ -23,7 +23,7 @@ The module will create:
 ```hcl
 
 #
-# 
+#
 
 module "iam" {
    source                                    = "git::https://git@github.com/ucopacme/terraform-aws-assume-role.git?ref=v0.0.2"

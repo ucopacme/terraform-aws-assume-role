@@ -13,6 +13,7 @@ variable "policy_jsons" {
   type        = list
   default     = []
 }
+
 variable "policy_arns" {
   description = "ARNs of IAM policies for the role"
   type        = list
@@ -53,10 +54,4 @@ variable "enabled" {
   default     = true
   description = "Set to `false` to prevent the module from creating any resources"
   type        = bool
-}
-
-variable "attach_rds_directoryservice_access_policy" {
-  description = "Toggles attachment of the attach_rds_directoryservice_access_policy"
-  type        = bool
-  default     = false
 }
