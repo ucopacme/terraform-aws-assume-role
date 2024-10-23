@@ -1,5 +1,3 @@
-# Terraform module which creates IAM Role and IAM Policy resources on AWS.
-
 resource "aws_iam_role" "role" {
   count                 = var.enabled ? 1 : 0
   name                  = var.name
@@ -29,4 +27,12 @@ resource "aws_iam_role_policy_attachment" "attached_policies" {
   role       = join("", aws_iam_role.role.*.name)
   policy_arn = var.policy_arns[count.index]
   count      = length(var.policy_arns)
+}
+
+# Conditionally creating instance profile
+resource "aws_iam_instance_profile" "instance_profile" {
+  count = var.create_instance_profile ? 1 : 0
+  name  = "${var.name}-instance-profile"
+  role  = aws_iam_role.role.name
+  path  = var.path
 }
