@@ -14,6 +14,12 @@ variable "policy_jsons" {
   default     = []
 }
 
+variable "create_instance_profile" {
+  description = "Whether to create an instance profile for the IAM role"
+  type        = bool
+  default     = false
+}
+
 variable "policy_arns" {
   description = "ARNs of IAM policies for the role"
   type        = list
