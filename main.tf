@@ -33,6 +33,6 @@ resource "aws_iam_role_policy_attachment" "attached_policies" {
 resource "aws_iam_instance_profile" "instance_profile" {
   count = var.create_instance_profile ? 1 : 0
   name  = "${var.name}-instance-profile"
-  role  = aws_iam_role.role.name
+  role  = aws_iam_role.role[0].name
   path  = var.path
 }
